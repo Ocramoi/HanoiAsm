@@ -28,7 +28,7 @@ e execute o simulador com
 O vídeo de apresentação do projeto pode ser conferido [pelo link](https://github.com/Ocramoi/HanoiAsm/blob/main/Apresentacao.mp4?raw=true)
 
 ## Modificações no simulador/montador
-Para o acrescimo no emulador no processor, foi adicionada a montagem e simulação da instrução `pow`, devidamente adicionada ao manual. Essa função funciona no formato:
+Para o acrescimo no emulador no processor, foi adicionada a montagem e simulação da instrução `pow`, devidamente adicionada ao [manual](https://github.com/Ocramoi/HanoiAsm/blob/main/NovoManual.pdf). Essa função funciona no formato:
 
 `pow rx, ry, rz`: rx <- ry<sup>rz</sup>
 
