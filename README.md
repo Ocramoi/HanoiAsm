@@ -25,7 +25,7 @@ e execute o simulador com
 ```
 
 ## Apresentação
-O vídeo de apresentação do projeto pode ser conferido [pelo link](https://github.com/Ocramoi/HanoiAsm/blob/main/Apresentacao.mp4?raw=true)
+O vídeo de apresentação do projeto pode ser conferido [pelo link](https://github.com/Ocramoi/HanoiAsm/blob/main/Apresentacao.mp4?raw=true).
 
 ## Modificações no simulador/montador
 Para o acrescimo no emulador no processor, foi adicionada a montagem e simulação da instrução `pow`, devidamente adicionada ao [manual](https://github.com/Ocramoi/HanoiAsm/blob/main/NovoManual.pdf). Essa função funciona no formato:
