@@ -1,6 +1,6 @@
 jmp main
 
-    ;; Variáveis globais de programa
+;; Variáveis globais de programa
 initCabecalho: string "####################"
 initTitulo: string "#  TORRE DE HANOI  #"
 entradaNum: string "Numero de discos da torre [1-9]: "
