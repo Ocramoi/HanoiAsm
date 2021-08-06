@@ -44,8 +44,8 @@ main:
     sub r2, r2, r0
     store num, r2
 
-    ;; Parâmetros de chamada de função [r0 = n, r5 = from_rod, r6 = to_rod, r7 = aux_rod]
-    mov r0, r2
+    ;; Parâmetros de chamada de função [r4 = n, r5 = from_rod, r6 = to_rod, r7 = aux_rod]
+    mov r4, r2
     loadn r5, #'A'
     loadn r6, #'C'
     loadn r7, #'B'
@@ -61,8 +61,8 @@ torreHanoi:
     push r2
 
     ;; Confere se n == 1
-    loadn r3, #1
-    cmp r3, r0
+    loadn r1, #1
+    cmp r1, r4
     jne naoUm
 
     ;; Caso n == 1 exibe string
@@ -76,34 +76,68 @@ torreHanoi:
     outchar r5, r0
     inc r0
 
-    ;breakp
-    rts
+    load r0, cursor
+    loadn r1, #15
+    sub r0, r0, r1
+    loadn r1, #moveUmS
+    call printStr
 
-    ;; loadn r1, #14
-    ;; add r0, r0, r1
-    ;; outchar r6, r0
+    ;; Exibe from_rod no local correto
+    load r0, cursor
+    loadn r1, #1
+    sub r0, r0, r1
+    outchar r6, r0
+
+    jmp fimChamada
 
 naoUm:
+    push r1
+    push r4
+    push r5
+    push r6
+    push r7
 
-    pop r2
-    pop r1
-    pop r0
-
-    chamada_recursiva_1:
-    ;; Parâmetros de chamada de função [r0 = n, r5 = from_rod, r6 = to_rod, r7 = aux_rod]
-    ;; Trocando os parametros de ordem para nova chamada
-    loadn r0, #num
-    mov r4, r6
-    mov r6, r7
-    mov r7, r4
-    ;; loadn r5, #'A'
-    ;; loadn r6, #'C'
-    ;; loadn r7, #'B'
-    ;; Chama função recursiva
+    mov r1, r7
+    mov r7, r6
+    mov r6, r1
+    loadn r1, #1
+    sub r4, r4, r1
     call torreHanoi
 
-    loadn r1, #moveUmP
+    pop r7
+    pop r6
+    pop r5
+    pop r4
+    pop r1
+
+
+    ;; Exibe string
+    loadn r1, #moveDiscoN
     call printLinha
+
+    ;; Exibe disco no local correto
+    load r0, cursor
+    loadn r1, #27
+    sub r0, r0, r1
+
+    push r4
+    push r1
+    loadn r1, #48
+    add r4, r1, r4
+    outchar r4, r0
+    pop r1
+    pop r4
+
+    ;; Exibe string intermediária no local correto
+    push r0
+    push r1
+    load r0, cursor
+    loadn r1, #26
+    sub r0, r0, r1
+    loadn r1, #moveDiscoO
+    call printStr
+    pop r1
+    pop r0
 
     ;; Exibe from_rod no local correto
     load r0, cursor
@@ -112,18 +146,44 @@ naoUm:
     outchar r5, r0
     inc r0
 
-    chamada_recursiva_2:
-    ;; Parâmetros de chamada de função [r0 = n, r5 = from_rod, r6 = to_rod, r7 = aux_rod]
-    ;; Trocando os parametros de ordem para nova chamada
-    loadn r0, #num
-    mov r4, r5
+    ;; Exibe string final no local correto
+    load r0, cursor
+    loadn r1, #15
+    sub r0, r0, r1
+    loadn r1, #moveDiscoD
+    call printStr
+
+    ;; Exibe _rod no local correto
+    load r0, cursor
+    loadn r1, #1
+    sub r0, r0, r1
+    outchar r6, r0
+    inc r0
+
+    push r1
+    push r4
+    push r5
+    push r6
+    push r7
+
+    mov r1, r5
     mov r5, r7
-    mov r7, r4
-    ;; loadn r5, #'A'
-    ;; loadn r6, #'C'
-    ;; loadn r7, #'B'
-    ;; Chama função recursiva
+    mov r7, r1
+
+    loadn r1, #1
+    sub r4, r4, r1
     call torreHanoi
+
+    pop r7
+    pop r6
+    pop r5
+    pop r4
+    pop r1
+
+fimChamada:
+    pop r2
+    pop r1
+    pop r0
 
     rts
 
@@ -205,17 +265,24 @@ printLinha:
 
     push r2
 
-    loadn r2, #1200
+    loadn r2, #1139
     cmp r0, r2
     jel salvaLinha
 
 zeraLinha:
     loadn r2, #0
+    store cursor, r2
+    ;; breakp
+    call limpaTela
+
+    pop r2
+    pop r1
+
+    rts
 
 salvaLinha:
     pop r2
     store cursor, r0
-
     pop r1
 
     rts
