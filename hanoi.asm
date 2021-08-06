@@ -49,8 +49,13 @@ main:
     loadn r5, #'A'
     loadn r6, #'C'
     loadn r7, #'B'
+
     ;; Chama função recursiva
     call torreHanoi
+
+    loadn r1, #2
+    loadn r2, #10
+    pow r0, r1, r2
 
     halt
 
@@ -265,7 +270,7 @@ printLinha:
 
     push r2
 
-    loadn r2, #1139
+    loadn r2, #1160
     cmp r0, r2
     jel salvaLinha
 
