@@ -7,6 +7,9 @@ initTitulo: string "#  TORRE DE HANOI  #"
 entradaNum: string "Numero de discos da torre [1-9]: "
 moveUmP:    string "Mova o disco 1 da torre "
 moveUmS:    string " para a torre "
+moveDiscoN:    string "Mova o disco "
+moveDiscoO:    string " da torre "
+moveDiscoD:    string " para a torre "
 
 cursor:     var #1
 num:        var #1
@@ -73,7 +76,8 @@ torreHanoi:
     outchar r5, r0
     inc r0
 
-    breakp
+    ;breakp
+    rts
 
     ;; loadn r1, #14
     ;; add r0, r0, r1
@@ -88,18 +92,16 @@ naoUm:
     chamada_recursiva_1:
     ;; Parâmetros de chamada de função [r0 = n, r5 = from_rod, r6 = to_rod, r7 = aux_rod]
     ;; Trocando os parametros de ordem para nova chamada
-    mov r0, r2
+    loadn r0, #num
     mov r4, r6
     mov r6, r7
     mov r7, r4
-    ;; talvez tenha que dar um mov entre os registradores
     ;; loadn r5, #'A'
     ;; loadn r6, #'C'
     ;; loadn r7, #'B'
     ;; Chama função recursiva
     call torreHanoi
 
-    ;; Caso n == 1 exibe string
     loadn r1, #moveUmP
     call printLinha
 
@@ -112,8 +114,8 @@ naoUm:
 
     chamada_recursiva_2:
     ;; Parâmetros de chamada de função [r0 = n, r5 = from_rod, r6 = to_rod, r7 = aux_rod]
-    mov r0, r2
     ;; Trocando os parametros de ordem para nova chamada
+    loadn r0, #num
     mov r4, r5
     mov r5, r7
     mov r7, r4
@@ -123,7 +125,6 @@ naoUm:
     ;; Chama função recursiva
     call torreHanoi
 
-    ;; Talvez o rts tenha que ser na funcao de cima?
     rts
 
 leNum:
